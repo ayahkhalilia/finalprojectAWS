@@ -1,0 +1,154 @@
+:root {
+  --bg-main: #eaf6fb;
+  --bg-accent: #add8e6;
+  --bg-card: #ffffff;
+  --bg-soft: #f5fbfe;
+
+  --border-soft: #cde8f3;
+  --border-strong: #9ecfe2;
+
+  --text-main: #1f2937;
+  --text-muted: #5b7280;
+
+  --blue-main: #5bb6d6;
+  --blue-hover: #3fa6c8;
+
+  --red: #ef5350;
+}
+
+/* Page */
+.cpage {
+  min-height: 100vh;
+  padding: 28px 16px;
+  background:
+    radial-gradient(1000px 500px at 20% 0%, #d7eef7, transparent 55%),
+    radial-gradient(800px 400px at 90% 10%, #c7e9f5, transparent 50%),
+    var(--bg-main);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text-main);
+}
+
+.cshell {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* Header */
+.ctopbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.ckicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ctitle {
+  margin: 6px 0;
+  font-size: 28px;
+}
+
+.csub {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Card */
+.ccard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* Form */
+.cform {
+  display: grid;
+  gap: 18px;
+}
+
+.cfield {
+  display: grid;
+  gap: 6px;
+}
+
+.clabel {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cinput {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  font-size: 14px;
+}
+
+.cinput:focus {
+  outline: none;
+  border-color: var(--border-strong);
+  background: #fff;
+}
+
+/* Options */
+.coptions {
+  display: grid;
+  gap: 8px;
+}
+
+/* Error */
+.cerror {
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  color: #b71c1c;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+
+/* Buttons */
+.cactions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cbtn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.cbtn:hover {
+  background: var(--bg-accent);
+  border-color: var(--border-strong);
+}
+
+.cbtn.primary {
+  background: var(--blue-main);
+  border-color: var(--blue-main);
+  color: #fff;
+}
+
+.cbtn.primary:hover {
+  background: var(--blue-hover);
+}
+
+.cbtn.soft {
+  align-self: flex-start;
+  font-size: 13px;
+}
+
+.cbtn.ghost {
+  background: transparent;
+}

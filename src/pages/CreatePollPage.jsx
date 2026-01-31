@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../CreatePollPage.css";
 
 const API = "https://o3kk3hlbwd.execute-api.eu-central-1.amazonaws.com/dev";
 
@@ -37,7 +38,7 @@ export default function CreatePollPage({ idToken }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`, 
+          Authorization: `Bearer ${idToken}`,
         },
         body: JSON.stringify({
           title,
@@ -46,17 +47,10 @@ export default function CreatePollPage({ idToken }) {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to create poll");
-      }
-
-      console.log("Created poll:", data);
+      if (!res.ok) throw new Error(data.message || "Failed to create poll");
 
       navigate(`/admin/poll/${data.poll_id}/live`);
-
     } catch (err) {
-      console.error(err);
       setError(err.message);
     } finally {
       setLoading(false);
@@ -64,44 +58,76 @@ export default function CreatePollPage({ idToken }) {
   };
 
   return (
-    <div style={{ padding: 30, maxWidth: 500 }}>
-      <h2>Create New Poll</h2>
+    <div className="cpage">
+      <div className="cshell">
+        <header className="ctopbar">
+          <div>
+            <div className="ckicker">Admin</div>
+            <h2 className="ctitle">Create New Poll</h2>
+            <p className="csub">
+              Define the poll question and its options
+            </p>
+          </div>
 
-      <form onSubmit={submit}>
-        <div style={{ marginBottom: 12 }}>
-          <label>Poll title</label><br />
-          <input
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            required
-            style={{ width: "100%", padding: 8 }}
-          />
-        </div>
+          <button className="cbtn ghost" onClick={() => navigate("/admin")}>
+            Back
+          </button>
+        </header>
 
-        <label>Options</label>
-        {options.map((opt, i) => (
-          <div key={i} style={{ marginBottom: 6 }}>
+        <form className="ccard cform" onSubmit={submit}>
+          <div className="cfield">
+            <label className="clabel">Poll title</label>
             <input
-              value={opt}
-              onChange={e => updateOption(i, e.target.value)}
+              className="cinput"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g. What is your favorite color?"
               required
-              style={{ width: "100%", padding: 8 }}
             />
           </div>
-        ))}
 
-        <button type="button" onClick={addOption}>
-          + Add option
-        </button>
+          <div className="cfield">
+            <label className="clabel">Options</label>
 
-        <br /><br />
+            <div className="coptions">
+              {options.map((opt, i) => (
+                <input
+                  key={i}
+                  className="cinput"
+                  value={opt}
+                  onChange={(e) => updateOption(i, e.target.value)}
+                  placeholder={`Option ${i + 1}`}
+                  required
+                />
+              ))}
+            </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+            <button
+              type="button"
+              className="cbtn soft"
+              onClick={addOption}
+            >
+              + Add option
+            </button>
+          </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create poll"}
-        </button>
-      </form>
+          {error && (
+            <div className="cerror">
+              {error}
+            </div>
+          )}
+
+          <div className="cactions">
+            <button
+              type="submit"
+              className="cbtn primary"
+              disabled={loading}
+            >
+              {loading ? "Creating..." : "Create poll"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
