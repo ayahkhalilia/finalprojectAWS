@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../AdminPage.css";
 
 const API = "https://o3kk3hlbwd.execute-api.eu-central-1.amazonaws.com/dev";
 
@@ -53,53 +54,105 @@ export default function AdminPage({ idToken, onLogout }) {
   }, [idToken]);
 
   return (
-    <div style={{ fontFamily: "system-ui", padding: 30 }}>
-      <h2>Admin Dashboard</h2>
-      <p>You are logged in as <b>ADMIN</b>.</p>
+    <div className="apage">
+      <div className="ashell">
+        <header className="atopbar">
+          <div>
+            <div className="akicker">Voting System</div>
+            <h2 className="atitle">Admin Dashboard</h2>
+            <p className="asub">
+              You are logged in as <span className="apill">ADMIN</span>.
+            </p>
+                        <button className="abtn primary" onClick={createPoll}>
+              + Create new poll
+            </button>
+          </div>
 
-      <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
-        <button onClick={onLogout}>Logout</button>
-        <button onClick={createPoll}>Create new poll</button>
-      </div>
+          <div className="aactions">
+            <button className="abtn ghost" onClick={onLogout}>
+              Logout
+            </button>
 
-      <hr />
+          </div>
+        </header>
 
-      {loading && <p>Loading polls…</p>}
-      {error && <p style={{ color: "crimson" }}>{error}</p>}
-
-      <div style={{ display: "grid", gap: 16, marginTop: 20 }}>
-        {polls.map((poll) => (
-          <div
-            key={poll.poll_id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: 12,
-              padding: 16,
-              cursor: "pointer",
-            }}
-onClick={() => {
-  if (poll.status === "open") {
-    navigate(`/admin/poll/${poll.poll_id}/live`);
-  }
-}}
-          >
-            <h3 style={{ margin: "0 0 6px 0" }}>{poll.title}</h3>
-            <small>Status: <b>{poll.status}</b></small>
-
-            <div style={{ marginTop: 10 }}>
-              {Object.keys(poll.counts || {}).length === 0 ? (
-                <p style={{ color: "#777" }}>No votes yet</p>
-              ) : (
-                Object.entries(poll.counts).map(([opt, count]) => (
-                  <div key={opt} style={{ display: "flex", justifyContent: "space-between" }}>
-                    <span>{opt}</span>
-                    <b>{count}</b>
-                  </div>
-                ))
-              )}
+        {loading && (
+          <div className="acard astate">
+            <div className="aspinner" />
+            <div>
+              <h3>Loading polls</h3>
+              <p>Please wait…</p>
             </div>
           </div>
-        ))}
+        )}
+
+        {error && (
+          <div className="acard astate error">
+            
+            <h3>Couldn’t load polls</h3>
+            <p className="amono">{error}</p>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="agrid">
+            {polls.map((poll) => {
+              const isOpen = poll.status === "open";
+              const hasVotes = Object.keys(poll.counts || {}).length > 0;
+
+              return (
+                <div
+                  key={poll.poll_id}
+                  className={`acard apollCard ${isOpen ? "clickable" : "disabled"}`}
+                  onClick={() => {
+                    if (isOpen) navigate(`/admin/poll/${poll.poll_id}/live`);
+                  }}
+                  role={isOpen ? "button" : undefined}
+                  tabIndex={isOpen ? 0 : -1}
+                >
+                  <div className="apollHead">
+                    <div>
+                      <div className={`abadge ${isOpen ? "ok" : "muted"}`}>
+                        {isOpen ? "Open" : "Closed"}
+                      </div>
+                      <h3 className="apollTitle">{poll.title}</h3>
+                      <div className="ameta">
+                        Status: <b>{poll.status}</b>
+                        {isOpen ? (
+                          <span className="ahint">• Click to open live view</span>
+                        ) : (
+                          <span className="ahint">• Poll ended</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="acountChip">
+                      <div className="acountLabel">Votes</div>
+                      <div className="acountValue">
+                        {hasVotes
+                          ? Object.values(poll.counts).reduce((a, b) => a + b, 0)
+                          : 0}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="aresults">
+                    {!hasVotes ? (
+                      <p className="amutetext">No votes yet</p>
+                    ) : (
+                      Object.entries(poll.counts).map(([opt, count]) => (
+                        <div key={opt} className="arow">
+                          <span className="aopt">{opt}</span>
+                          <b className="anum">{count}</b>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

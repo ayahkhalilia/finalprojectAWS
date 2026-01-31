@@ -1,0 +1,300 @@
+/* ===== Same palette as your light theme ===== */
+:root {
+  --bg-main: #eaf6fb;
+  --bg-accent: #add8e6;
+  --bg-card: #ffffff;
+  --bg-soft: #f5fbfe;
+
+  --border-soft: #cde8f3;
+  --border-strong: #9ecfe2;
+
+  --text-main: #1f2937;
+  --text-muted: #5b7280;
+
+  --blue-main: #5bb6d6;
+  --blue-hover: #3fa6c8;
+
+  --green: #4caf50;
+  --red: #ef5350;
+}
+
+/* ===== Page ===== */
+.apage {
+  min-height: 100vh;
+  padding: 28px 16px;
+  background:
+    radial-gradient(1000px 500px at 20% 0%, #d7eef7, transparent 55%),
+    radial-gradient(800px 400px at 90% 10%, #c7e9f5, transparent 50%),
+    var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.ashell {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.atopbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 820px) {
+  .atopbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.akicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.atitle {
+  margin: 6px 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.asub {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.apill {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bg-accent);
+  color: #034b63;
+  font-weight: 700;
+}
+
+/* ===== Actions ===== */
+.aactions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.abtn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 600;
+}
+
+.abtn:hover {
+  background: var(--bg-accent);
+  border-color: var(--border-strong);
+}
+
+.abtn.ghost {
+  background: transparent;
+}
+
+.abtn.primary {
+  background: var(--blue-main);
+  border-color: var(--blue-main);
+  color: white;
+}
+
+.abtn.primary:hover {
+  background: var(--blue-hover);
+  border-color: var(--blue-hover);
+}
+
+/* ===== Cards ===== */
+.acard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== Grid of polls ===== */
+.agrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+@media (max-width: 900px) {
+  .agrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Poll card ===== */
+.apollCard {
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.apollCard.clickable {
+  cursor: pointer;
+}
+
+.apollCard.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-strong);
+}
+
+.apollCard.disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.apollHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.apollTitle {
+  margin: 6px 0 6px;
+  font-size: 18px;
+}
+
+.ameta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.ahint {
+  margin-left: 8px;
+  color: #3b7a8f;
+}
+
+/* ===== Badge ===== */
+.abadge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--bg-accent);
+  color: #034b63;
+  font-weight: 700;
+}
+
+.abadge.ok {
+  background: #dff4e3;
+  color: #1b5e20;
+  border: 1px solid #bfe4c7;
+}
+
+.abadge.muted {
+  background: #eef6fb;
+  color: #2b6a82;
+  border: 1px solid var(--border-soft);
+}
+
+.abadge.danger {
+  background: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c6cb;
+}
+
+/* ===== Votes chip ===== */
+.acountChip {
+  min-width: 86px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.acountLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.acountValue {
+  font-size: 18px;
+  font-weight: 900;
+  margin-top: 2px;
+}
+
+/* ===== Results list ===== */
+.aresults {
+  margin-top: 12px;
+  border-top: 1px solid var(--border-soft);
+  padding-top: 12px;
+}
+
+.arow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(205, 232, 243, 0.9);
+}
+
+.arow:last-child {
+  border-bottom: none;
+}
+
+.aopt {
+  color: var(--text-main);
+}
+
+.anum {
+  color: #0b3a4a;
+}
+
+.amutetext {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ===== Loading / error cards ===== */
+.astate {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.astate.error {
+  border-color: #f5c6cb;
+  background: #fdecea;
+}
+
+.amono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  color: #8b2b2b;
+}
+
+/* ===== Spinner ===== */
+.aspinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid #cde8f3;
+  border-top-color: var(--blue-main);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
