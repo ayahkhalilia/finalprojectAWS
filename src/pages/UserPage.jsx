@@ -170,7 +170,7 @@ export default function UserPage({ idToken, onLogout }) {
 
             {votedOption ? (
               <div className="votedBox">
-                <div className="check" aria-hidden="true">✓</div>
+                
                 <div>
                   <h4>Vote received</h4>
                   <p>
