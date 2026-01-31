@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../AdminLivePollPage.css";
 
 const API = "https://o3kk3hlbwd.execute-api.eu-central-1.amazonaws.com/dev";
 
 const resultUrl = (pollId) => `${API}/poll/${pollId}/result`;
-const closeUrl  = (pollId) => `${API}/poll/${pollId}/close`; 
+const closeUrl  = (pollId) => `${API}/poll/${pollId}/close`;
 
 export default function AdminLivePollPage({ idToken }) {
   const { pollId } = useParams();
   const navigate = useNavigate();
 
-  const [counts, setCounts] = useState(null);    
+  const [counts, setCounts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [ending, setEnding] = useState(false);
   const [error, setError] = useState(null);
@@ -28,9 +29,7 @@ export default function AdminLivePollPage({ idToken }) {
         setError(null);
         const res = await fetch(resultUrl(pollId), {
           method: "GET",
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
+          headers: { Authorization: `Bearer ${idToken}` },
         });
 
         const data = await res.json();
@@ -60,9 +59,8 @@ export default function AdminLivePollPage({ idToken }) {
       setEnding(true);
       setError(null);
 
-
       const res = await fetch(closeUrl(pollId), {
-        method: "POST", 
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${idToken}`,
@@ -82,74 +80,77 @@ export default function AdminLivePollPage({ idToken }) {
   };
 
   return (
-    <div style={{ padding: 30, fontFamily: "system-ui", maxWidth: 700 }}>
-      <h2>Live Poll Results</h2>
-      <p><b>Poll ID:</b> {pollId}</p>
-
-      {error && (
-        <p style={{ color: "crimson" }}>
-          {error}
-        </p>
-      )}
-
-      {loading ? (
-        <p>Loading live votes…</p>
-      ) : (
-        <>
-          <p><b>Total votes:</b> {totalVotes}</p>
-
-          <div style={{ display: "grid", gap: 10 }}>
-            {Object.entries(counts || {}).map(([optionId, value]) => {
-              const v = Number(value || 0);
-              const pct = totalVotes > 0 ? Math.round((v / totalVotes) * 100) : 0;
-
-              return (
-                <div
-                  key={optionId}
-                  style={{
-                    border: "1px solid #ddd",
-                    borderRadius: 10,
-                    padding: 12,
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <b>{optionId}</b>
-                    <span>{v} ({pct}%)</span>
-                  </div>
-
-                  <div style={{ height: 10, background: "#eee", borderRadius: 999, marginTop: 8 }}>
-                    <div
-                      style={{
-                        height: "100%",
-                        width: `${pct}%`,
-                        background: "#333",
-                        borderRadius: 999,
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+    <div className="lpage">
+      <div className="lshell">
+        <header className="ltopbar">
+          <div>
+            <div className="lkicker">Admin</div>
+            <h2 className="ltitle">Live Poll Results</h2>
+            <p className="lmeta">
+              <span className="lbadge">Poll ID</span> <span className="lmono">{pollId}</span>
+            </p>
           </div>
-        </>
-      )}
 
-      <div style={{ marginTop: 20, display: "flex", gap: 12 }}>
-        <button
-          type="button"
-          onClick={() => navigate("/admin")}
-        >
-          Back
-        </button>
+          <div className="lactions">
+            <button className="lbtn ghost" onClick={() => navigate("/admin")}>
+              Back
+            </button>
 
-        <button
-          type="button"
-          onClick={endPoll}
-          disabled={ending}
-          style={{ marginLeft: "auto" }}
-        >
-          {ending ? "Ending..." : "End poll"}
-        </button>
+            <button className="lbtn danger" onClick={endPoll} disabled={ending}>
+              {ending ? "Ending..." : "End poll"}
+            </button>
+          </div>
+        </header>
+
+        {error && (
+          <div className="lcard lstate error">
+            <div className="lbadge danger">Error</div>
+            <p className="lmono">{error}</p>
+          </div>
+        )}
+
+        {loading ? (
+          <div className="lcard lstate">
+            <div className="lspinner" />
+            <div>
+              <h3>Loading live votes</h3>
+              <p>Updating every 2 seconds…</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="lsummary">
+              <div className="lcard lsummaryCard">
+                <div className="lsumLabel">Total votes</div>
+                <div className="lsumValue">{totalVotes}</div>
+                <div className="lsumHint">Live updates are enabled</div>
+              </div>
+            </div>
+
+            <div className="lgrid">
+              {Object.entries(counts || {}).map(([optionId, value]) => {
+                const v = Number(value || 0);
+                const pct =
+                  totalVotes > 0 ? Math.round((v / totalVotes) * 100) : 0;
+
+                return (
+                  <div key={optionId} className="lcard loptionCard">
+                    <div className="lrow">
+                      <div className="loptName">{optionId}</div>
+                      <div className="loptStats">
+                        <b>{v}</b> <span className="lmuted">({pct}%)</span>
+                      </div>
+                    </div>
+
+                    <div className="lbar">
+                      <div className="lfill" style={{ width: `${pct}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

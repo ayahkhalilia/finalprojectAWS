@@ -1,0 +1,248 @@
+:root {
+  --bg-main: #eaf6fb;
+  --bg-accent: #add8e6;
+  --bg-card: #ffffff;
+  --bg-soft: #f5fbfe;
+
+  --border-soft: #cde8f3;
+  --border-strong: #9ecfe2;
+
+  --text-main: #1f2937;
+  --text-muted: #5b7280;
+
+  --blue-main: #5bb6d6;
+  --blue-hover: #3fa6c8;
+
+  --green: #4caf50;
+  --red: #ef5350;
+}
+
+/* Page */
+.lpage {
+  min-height: 100vh;
+  padding: 28px 16px;
+  background:
+    radial-gradient(1000px 500px at 20% 0%, #d7eef7, transparent 55%),
+    radial-gradient(800px 400px at 90% 10%, #c7e9f5, transparent 50%),
+    var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.lshell {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+.ltopbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 820px) {
+  .ltopbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.lkicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ltitle {
+  margin: 6px 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.lmeta {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+/* Badge */
+.lbadge {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--bg-accent);
+  color: #034b63;
+  font-weight: 700;
+}
+
+.lbadge.danger {
+  background: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c6cb;
+}
+
+/* Cards */
+.lcard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+/* States */
+.lstate {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.lstate.error {
+  border-color: #f5c6cb;
+  background: #fdecea;
+}
+
+/* Buttons */
+.lactions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.lbtn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-weight: 700;
+}
+
+.lbtn:hover {
+  background: var(--bg-accent);
+  border-color: var(--border-strong);
+}
+
+.lbtn.ghost {
+  background: transparent;
+}
+
+.lbtn.danger {
+  background: #fdecea;
+  border-color: #f5c6cb;
+  color: #b71c1c;
+}
+
+.lbtn.danger:hover {
+  background: #fbd6d2;
+}
+
+/* Summary */
+.lsummary {
+  margin: 14px 0;
+}
+
+.lsummaryCard {
+  display: grid;
+  gap: 6px;
+}
+
+.lsumLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.lsumValue {
+  font-size: 34px;
+  font-weight: 900;
+  color: #0b3a4a;
+}
+
+.lsumHint {
+  font-size: 13px;
+  color: #3b7a8f;
+}
+
+/* Options list */
+.lgrid {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Option card */
+.loptionCard {
+  padding: 14px 16px;
+}
+
+.lrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.loptName {
+  font-weight: 800;
+}
+
+.loptStats {
+  color: var(--text-main);
+}
+
+.lmuted {
+  color: var(--text-muted);
+}
+
+/* Progress bar */
+.lbar {
+  height: 12px;
+  background: #e6f4fa;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lfill {
+  height: 100%;
+  background: var(--blue-main);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+/* Mono */
+.lmono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+/* Spinner */
+.lspinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid #cde8f3;
+  border-top-color: var(--blue-main);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
