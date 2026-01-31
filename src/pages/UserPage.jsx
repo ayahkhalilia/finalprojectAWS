@@ -109,8 +109,7 @@ export default function UserPage({ idToken, onLogout }) {
     return (
       <div className="page">
         <div className="shell">
-          <div className="card state error">
-            <div className="badge">Error</div>
+          <div className="card state error">           
             <h3>Something went wrong</h3>
             <p className="mono">{error}</p>
             <button className="btn ghost" onClick={onLogout}>
@@ -136,7 +135,6 @@ export default function UserPage({ idToken, onLogout }) {
           </header>
 
           <div className="card state">
-            <div className="badge">No poll</div>
             <h3>No active poll</h3>
             <p>There isn’t an open poll right now. Check back soon.</p>
           </div>
@@ -165,7 +163,7 @@ export default function UserPage({ idToken, onLogout }) {
                 <div className="badge">Active poll</div>
                 <h3 className="pollTitle">{poll.title}</h3>
                 <p className="sub">
-                  Pick one option. Your vote is sent securely using your token.
+                  Pick one option.
                 </p>
               </div>
             </div>
@@ -199,25 +197,7 @@ export default function UserPage({ idToken, onLogout }) {
             )}
           </section>
 
-          <aside className="card sideCard">
-            <h4 className="sideTitle">Tips</h4>
-            <ul className="sideList">
-              <li>Make sure you select the correct option.</li>
-              <li>If you refresh, you might see the poll again (depends on backend rules).</li>
-              <li>When the admin closes the poll, it will disappear here.</li>
-            </ul>
 
-            <div className="divider" />
-
-            <div className="mini">
-              <div className="miniLabel">Status</div>
-              <div className="miniValue">{votedOption ? "Voted" : "Not voted yet"}</div>
-            </div>
-
-            <button className="btn danger" onClick={onLogout}>
-              Logout
-            </button>
-          </aside>
         </main>
       </div>
     </div>
