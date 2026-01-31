@@ -1,68 +1,247 @@
+/* ===== Root colors ===== */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --bg-main: #eaf6fb;
+  --bg-accent: #add8e6;
+  --bg-card: #ffffff;
+  --bg-soft: #f5fbfe;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --border-soft: #cde8f3;
+  --border-strong: #9ecfe2;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --text-main: #1f2937;
+  --text-muted: #5b7280;
+
+  --blue-main: #5bb6d6;
+  --blue-hover: #3fa6c8;
+
+  --green: #4caf50;
+  --red: #ef5350;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+/* ===== Page background ===== */
+.page {
   min-height: 100vh;
+  padding: 28px 16px;
+  background:
+    radial-gradient(1000px 500px at 20% 0%, #d7eef7, transparent 55%),
+    radial-gradient(800px 400px at 90% 10%, #c7e9f5, transparent 50%),
+    var(--bg-main);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.shell {
+  max-width: 980px;
+  margin: 0 auto;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* ===== Top bar ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  margin-top: 6px;
+  font-size: 26px;
+}
+
+/* ===== Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+}
+
+.sideCard {
+  position: sticky;
+  top: 16px;
+}
+
+@media (max-width: 900px) {
+  .sideCard {
+    position: static;
+  }
+}
+
+/* ===== Badges ===== */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--bg-accent);
+  color: #034b63;
+  margin-bottom: 10px;
+}
+
+/* ===== Poll ===== */
+.pollTitle {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* ===== Options ===== */
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.optionBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.15s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+.optionBtn:hover {
+  background: var(--bg-accent);
+  border-color: var(--border-strong);
+}
+
+.optionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.optionText {
+  font-weight: 600;
+}
+
+.optionMeta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ===== Voted state ===== */
+.votedBox {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: #e8f6ec;
+  border: 1px solid #bfe4c7;
+}
+
+.check {
+  width: 34px;
+  height: 34px;
+  background: var(--green);
+  color: #fff;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg-accent);
+}
+
+/* ===== Side card ===== */
+.sideTitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.sideList {
+  padding-left: 18px;
+  color: var(--text-muted);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-soft);
+  margin: 14px 0;
+}
+
+.miniLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.miniValue {
+  font-weight: 700;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-soft);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--bg-accent);
+}
+
+.btn.danger {
+  background: #fdecea;
+  border-color: #f5c6cb;
+  color: #b71c1c;
+}
+
+/* ===== States ===== */
+.state {
+  display: flex;
+  gap: 14px;
+}
+
+.state.error {
+  background: #fdecea;
+  border-color: #f5c6cb;
+}
+
+/* ===== Spinner ===== */
+.spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid #cde8f3;
+  border-top-color: #5bb6d6;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
