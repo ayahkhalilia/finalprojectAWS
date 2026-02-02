@@ -8,7 +8,7 @@ import AdminLivePollPage from "./pages/AdminLivePollPage";
 
 const COGNITO_DOMAIN = "https://eu-central-1ubvthcgwi.auth.eu-central-1.amazoncognito.com";
 const CLIENT_ID = "2i93ovq6dpjrhq0ngram0g8ndk";
-const REDIRECT_URI = window.location.origin;
+const REDIRECT_URI = "https://d3cx1o7yf25y0n.cloudfront.net";
 
 function buildAuthorizeUrl() {
   const params = new URLSearchParams({
